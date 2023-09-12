@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'https://render-testing-629h.onrender.com/api/persons'
+const baseUrl = '/api/notes'
 
 const getAll = () => {
   const request =  axios.get(baseUrl)
