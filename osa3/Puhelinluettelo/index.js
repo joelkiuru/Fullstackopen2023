@@ -7,6 +7,8 @@ app.use(morgan('tiny'))
 
 app.use(express.json())
 
+app.use(express.static('build'))
+
 app.use(cors())
 
 let persons = [
