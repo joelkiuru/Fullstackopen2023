@@ -101,6 +101,7 @@ const App = () => {
         })
         .catch(error => {
           console.error('Error adding person:', error);
+          console.log(error.response.data)
           setMessage(`Error adding ${newName}`);
           setErrorMsg("error")
         });

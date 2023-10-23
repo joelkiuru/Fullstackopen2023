@@ -23,7 +23,7 @@ mongoose.connect(url)
         number: String
       })
 
-const Person = mongoose.model('Person', personSchema)
+// const Person = mongoose.model('Person', personSchema)
 
 personSchema.set('toJSON', {
     transform: (document, returnedObject) => {

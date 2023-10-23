@@ -89,13 +89,11 @@ app.post('/api/persons', (request, response, next) => {
     number: body.number || false,
   })
 
-  person
-    .save()
+  person.save()
     .then(savedPerson => {
       response.json(savedPerson)
     })
     .catch(error => next(error))
-    console.log(error.response.data)
 })
 
 app.put('/api/persons/:id', (request, response, next) => {
