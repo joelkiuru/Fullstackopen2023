@@ -52,13 +52,13 @@ const App = () => {
       .then(initialPersons => {
         setPersons(initialPersons)
       })
-  }, []) 
+  }, [])
 
   const addPerson = (event) => {
     event.preventDefault()
     const existingPerson = persons.find(e => e.name === newName);
     if (existingPerson) {
-      if  (window.confirm(`${newName} is already added to phonebook. Replace the old number with the new one?`)) {
+      if (window.confirm(`${newName} is already added to phonebook. Replace the old number with the new one?`)) {
         const updatedPerson = { ...existingPerson, number: newNumber }
         personService
           .update(existingPerson.id, updatedPerson)
@@ -78,7 +78,7 @@ const App = () => {
             setErrorMsg('error')
           })
       }
-       
+
     }
     else {
       const personObject = {
@@ -100,10 +100,14 @@ const App = () => {
 
         })
         .catch(error => {
-          console.error('Error adding person:', error);
+          console.error('Error adding person:', error)
           console.log(error.response.data)
-          setMessage(`Error adding ${newName}`);
-          setErrorMsg("error")
+          if (error.response.status === 400) {
+            setMessage(error.response.data.error)
+          } else {
+            setMessage(`Error adding ${newName}`)
+          }
+          setErrorMsg('error')
         });
     }
   }
