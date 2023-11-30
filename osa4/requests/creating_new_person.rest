@@ -1,9 +1,9 @@
-POST http://localhost:3003/api/blogs
+POST http://localhost:3003/api/blogs/
 Content-Type: application/json
 
 {
-    "title": "Keijo Erkkilä",
-    "author": "044",
-    "url": "author.com",
+    "title": "Keisssj Erkkilä",
+    "author": "04435",
+    "url": "author.coms",
     "likes": "22"
 }
