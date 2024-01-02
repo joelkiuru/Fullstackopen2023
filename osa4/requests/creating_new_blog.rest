@@ -1,0 +1,11 @@
+POST http://localhost:3003/api/blogs/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3RlcjEiLCJpZCI6IjY1ODM5MDZkYmExZGE2ZTEwMWYyMTVmMyIsImlhdCI6MTcwMzk4ODg0MiwiZXhwIjoxNzAzOTkyNDQyfQ.06GnKrKMuRD_ciabuVqduxMskMfuF2fBfGNpdFYJ_5I
+
+{
+    "title": "Test blog with login token2",
+    "author": "Erkki Pertti123",
+    "url": "http://www.cs.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+    "likes": 100,
+    "userId": "658305bf05920fef2066f9c5"
+}
