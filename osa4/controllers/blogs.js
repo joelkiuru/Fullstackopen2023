@@ -15,8 +15,14 @@ blogsRouter.post('/', tokenExtractor, async (request, response) => {
   const decodedToken = jwt.verify(request.token, process.env.SECRET)
 
   if (!decodedToken.id) {
-    return response.status(401).json({ error: 'token invalid' })
+    return response.status(401).json({
+      error: 'token invalid' })
   }
+
+  if (!body.title || !body.author || !body.url) {
+    response.status(400).json({ error: 'title, author, and url are required' })
+  }
+
   const user = await User.findById(decodedToken.id)
 
   const blog = new Blog({
@@ -28,6 +34,7 @@ blogsRouter.post('/', tokenExtractor, async (request, response) => {
   })
 
   const savedBlog = await blog.save()
+  await savedBlog.populate('user')
   user.blogs = user.blogs.concat(savedBlog._id)
   await user.save()
 
