@@ -43,12 +43,10 @@ const Blog = ({ blog, handleBlogLike, handleBlogDelete }) => {
 
 
   return (
-    <div style = {blogStyle}>
-      <div>
-        {blog.title} by {blog.author} <button onClick={toggleBlogStatus}>{buttonLable}</button>
-      </div>
+    <div className='blog' style = {blogStyle}>
+      {blog.title} by {blog.author} <button onClick={toggleBlogStatus}>{buttonLable}</button>
       {isBlogExpanded && (
-        <div>
+        <div data-testid="blog-expanded">
           <div>url: {blog.url} </div>
           <div>likes: {blog.likes} <button onClick={handleLike}>like</button></div>
           <div>user: {blog.user ? blog.user.username : 'none'}</div>
