@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const Blog = ({ blog, handleBlogLike, handleBlogDelete }) => {
+const Blog = ({ blog, handleBlogLike, handleBlogDelete, user }) => {
 
   const [isBlogExpanded, setIsBlogExpanded] = useState(false)
 
@@ -9,6 +9,8 @@ const Blog = ({ blog, handleBlogLike, handleBlogDelete }) => {
 
   const toggleBlogStatus = () => {
     setIsBlogExpanded(!isBlogExpanded)
+    console.log(user.name)
+    console.log(blog.user.name)
   }
 
   const blogStyle = {
@@ -41,6 +43,7 @@ const Blog = ({ blog, handleBlogLike, handleBlogDelete }) => {
     }
   }
 
+  const showDelete = blog.user.name === user.name ? true : false
 
   return (
     <div className='blog' style = {blogStyle}>
@@ -49,8 +52,8 @@ const Blog = ({ blog, handleBlogLike, handleBlogDelete }) => {
         <div data-testid="blog-expanded">
           <div>url: {blog.url} </div>
           <div>likes: {blog.likes} <button onClick={handleLike}>like</button></div>
-          <div>user: {blog.user ? blog.user.username : 'none'}</div>
-          {blog.user && blog.user.username && (
+          <div>user: {blog.user.name}</div>
+          {showDelete && (
             <button onClick={handleDelete}>remove</button>
           )}
         </div>

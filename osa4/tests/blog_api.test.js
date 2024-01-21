@@ -11,11 +11,17 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 
 beforeEach(async () => {
+  await User.deleteMany({})
   await Blog.deleteMany({})
   let blogObject = new Blog(helper.initialBlogs[0])
   await blogObject.save()
   blogObject = new Blog(helper.initialBlogs[1])
   await blogObject.save()
+
+  const passwordHash = await bcrypt.hash('sekret', 10)
+  const user = new User({ username: 'root', passwordHash })
+
+  await user.save()
 })
 
 test('blogs are returned as json', async () => {
@@ -50,6 +56,14 @@ test('blogs have field named id', async () => {
 })
 
 test('blogs can posted', async () => {
+  const user = {
+    username: 'root',
+    password: 'sekret',
+  }
+  const testUser = await api
+    .post('/api/login')
+    .send(user)
+
   const newBlog = {
     title: 'Test blog',
     author: 'Erkki Pertti',
@@ -62,6 +76,7 @@ test('blogs can posted', async () => {
     .post('/api/blogs')
     .send(newBlog)
     .expect(201)
+    .set('Authorization', `Bearer ${testUser.body.token}`)
     .expect('content-Type', /application\/json/)
 
   const response = await api.get('/api/blogs')
