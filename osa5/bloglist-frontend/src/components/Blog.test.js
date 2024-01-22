@@ -14,7 +14,7 @@ describe('blog component tests', () => {
       url: 'keijo.keijo.keijo'
     }
 
-    const { container } = render(<Blog blog={blog}/>)
+    const { container } = render(<Blog blog={blog} user={blog.user}/>)
 
     const div = container.querySelector('.blog')
 
@@ -23,6 +23,7 @@ describe('blog component tests', () => {
     )
     const element = screen.queryByText('keijo.keijo.keijo')
     expect(element).toBeNull()
+    screen.debug()
   })
 
   test('when a blog is expanded by clicking, more blog info is displayed', async () => {
@@ -36,7 +37,7 @@ describe('blog component tests', () => {
 
     const mockHandler = jest.fn()
 
-    render(<Blog blog={blog} toggleBlogStatus={mockHandler}/>)
+    render(<Blog blog={blog} toggleBlogStatus={mockHandler} user={blog.user}/>)
 
 
     const user = userEvent.setup()
@@ -60,7 +61,7 @@ describe('blog component tests', () => {
     const user = userEvent.setup()
     const handleBlogLike = jest.fn()
 
-    render(<Blog blog={blog} handleBlogLike={handleBlogLike}/>)
+    render(<Blog blog={blog} handleBlogLike={handleBlogLike} user={blog.user}/>)
 
 
     const viewButton = screen.getByText('view')
