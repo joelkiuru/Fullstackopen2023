@@ -1,13 +1,13 @@
 describe('Blog app', function() {
   beforeEach(function() {
-    cy.request('POST', 'http://localhost:3003/api/testing/reset')
+    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`)
     const user = {
       name: 'Pertti Perjantai',
       username: 'test1',
       password: 'sana1'
     }
-    cy.request('POST', 'http://localhost:3003/api/users/', user)
-    cy.visit('http://localhost:5173')
+    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user)
+    cy.visit('')
   })
 
 
@@ -71,7 +71,7 @@ describe('Blog app', function() {
         username: 'test2',
         password: 'sana2'
       }
-      cy.request('POST', 'http://localhost:3003/api/users/', user)
+      cy.request('POST', `${Cypress.env('BACKEND')}/users`, user)
       cy.createBlog({
         user: 'pertti666',
         likes: 22,
@@ -103,7 +103,7 @@ describe('Blog app', function() {
       cy.get('.blog').eq(1).contains('view').click()
       cy.get('.blog').eq(1).contains('like').click()
       cy.get('.blog').eq(1).contains('like').click()
-      cy.visit('http://localhost:5173')
+      cy.visit('')
       cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
       cy.get('.blog').eq(1).should('contain', 'The title with the second most likes')
     })
