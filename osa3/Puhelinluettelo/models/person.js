@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
-
-// const url =
-//   `mongodb+srv://fullstack:${password}@cluster0.h6pikgp.mongodb.net/phoneApp?retryWrites=true&w=majority`
+const uniqueValidator = require('mongoose-unique-validator')
 
 mongoose.set('strictQuery', false)
 
@@ -19,7 +17,8 @@ const personSchema = new mongoose.Schema({
   name: {
     type: String,
     minlength: 3,
-    required: true
+    required: true,
+    unique: true
   },
   number: {
     type: String,
@@ -31,7 +30,7 @@ const personSchema = new mongoose.Schema({
   }
 })
 
-// const Person = mongoose.model('Person', personSchema)
+personSchema.plugin(uniqueValidator)
 
 personSchema.set('toJSON', {
   transform: (document, returnedObject) => {
